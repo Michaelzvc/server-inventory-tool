@@ -3,25 +3,24 @@ import os
 from pathlib import Path
 
 
-def load_servers(data_file):
-    data_path = Path(data_file)
+def hamta_servrar(datafil):
+    filsokvag = Path(datafil)
 
-    if data_path.exists():
-        with open(data_path, "r", encoding="utf-8") as file:
-            servers = json.load(file)
+    if filsokvag.exists():
+        with open(filsokvag, "r", encoding="utf-8") as fil:
+            servrar = json.load(fil)
 
-        return servers 
+        return servrar
 
-    return []  # Return an empty list if the file does not exist
-
-
-def save_servers(servers, data_file):
-    data_path = Path(data_file)
-
-    with open(data_path, "w", encoding="utf-8") as file:
-        json.dump(servers, file, indent=4, ensure_ascii=False)
+    return []  # Returnera en tom lista om filen inte finns
 
 
-def get_data_file():
+def spara_servrar(servrar, datafil):
+    filsokvag = Path(datafil)
+
+    with open(filsokvag, "w", encoding="utf-8") as fil:
+        json.dump(servrar, fil, indent=4, ensure_ascii=False)
+
+
+def hamta_datafil():
     return os.environ.get("INVENTORY_DATAFIL", "servrar.json")
-
