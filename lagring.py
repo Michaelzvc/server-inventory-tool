@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 
 
@@ -19,4 +20,8 @@ def save_servers(servers, data_file):
 
     with open(data_path, "w", encoding="utf-8") as file:
         json.dump(servers, file, indent=4, ensure_ascii=False)
-        
+
+
+def get_data_file():
+    return os.environ.get("INVENTORY_DATAFIL", "servrar.json")
+
