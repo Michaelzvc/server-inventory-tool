@@ -30,5 +30,13 @@
         "roll": "utvecklingsserver",
         "status": "unknown",
         "senast_kontrollerad": ""
+    },
+    {
+        "namn": "app01",
+        "adress": "localhost",
+        "miljo": "dev",
+        "roll": "application",
+        "status": "unknown",
+        "senast_kontrollerad": ""
     }
 ]
