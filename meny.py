@@ -1,3 +1,5 @@
+from lagring import spara_servrar
+
 def visa_servrar(servrar):
     if not servrar:
         print("Inga servrar hittades.")
@@ -48,9 +50,6 @@ def lagg_till_servrar(servrar, datafil):
     }
 
     servrar.append(ny_server)
-
-    from lagring import spara_servrar
-
     spara_servrar(servrar, datafil)
 
     print("Server tillagd och sparad.")
