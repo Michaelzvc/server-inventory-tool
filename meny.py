@@ -43,7 +43,7 @@ def lagg_till_servrar(servrar, datafil):
         "adress": adress,
         "miljo": miljo,
         "roll": roll,
-        "status": "okänd",
+        "status": "unknown",
         "senast_kontrollerad": "",
     }
 
