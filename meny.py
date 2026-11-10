@@ -53,3 +53,29 @@ def lagg_till_servrar(servrar, datafil):
     spara_servrar(servrar, datafil)
 
     print("Server tillagd och sparad.")
+
+
+def ta_bort_server(servrar, data_fil):
+    namn = input("Ange namnet på servern du vill ta bort: ")
+
+    for server in servrar:
+        if server["namn"] == namn:
+
+            if server["miljo"] == "prod":
+                bekraftelse = input(
+                    "Du försöker ta bort en produktionsserver. Är du säker? (ja/nej): "
+                ).lower()
+
+                if bekraftelse != "ja":
+                    print("Borttagning avbruten.")
+                    return
+
+            servrar.remove(server)
+
+            from lagring import spara_servrar
+            spara_servrar(servrar, data_fil)
+
+            print("Servern har tagits bort.")
+            return
+
+    print("Server hittades inte.")
