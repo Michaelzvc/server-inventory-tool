@@ -79,3 +79,26 @@ def ta_bort_server(servrar, data_fil):
             return
 
     print("Server hittades inte.")
+
+
+def filtrera_servrar(servrar):
+    while True:
+        miljo = input("Ange miljö att filtrera på (dev, test, prod): ").lower()
+
+        if miljo in ["dev", "test", "prod"]:
+            break
+
+        print("Ogiltig miljö, vänligen försök igen.")
+
+    filtrerade_servrar = []
+
+    for server in servrar:
+        if server["miljo"] == miljo:
+            filtrerade_servrar.append(server)
+
+    print(f"\nServrar i miljön '{miljo}':")
+    visa_servrar(filtrerade_servrar)
+
+    
+
+        
