@@ -1,6 +1,6 @@
 import argparse
 import sys
-from lagring import hamta_servrar, hamta_datafil
+from lagring import hamta_servrar, hamta_datafil, exportera_csv
 from meny import visa_meny, visa_servrar
 from kontroller import kontrollera_server, kontrollera_alla_servrar
 
@@ -31,6 +31,12 @@ def main():
         "--kontrollera-alla",
         action="store_true",
         help="Kontrollera alla servrar."
+    )
+
+    parser.add_argument(
+    "--export",
+    action="store_true",
+    help="Exportera alla servrar till CSV."
     )
 
     argument = parser.parse_args()
@@ -71,6 +77,9 @@ def main():
             visa_servrar(filtrerade_servrar)
         else:
             visa_servrar(servrar)
+
+    elif argument.export:
+        exportera_csv(servrar)
 
     else:
         visa_meny(servrar, data_fil)
