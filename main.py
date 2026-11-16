@@ -14,13 +14,29 @@ def main():
         help="Visa alla servrar."
     )
 
+    parser.add_argument(
+        "--miljo",
+        choices=["dev", "test", "prod"],
+        help="Filtrera servrar efter miljö."
+    )
+
     argument = parser.parse_args()
 
     data_fil = hamta_datafil()
     servrar = hamta_servrar(data_fil)
 
     if argument.lista:
-        visa_servrar(servrar)
+        if argument.miljo:
+            filtrerade_servrar = []
+
+            for server in servrar:
+                if server["miljo"] == argument.miljo:
+                    filtrerade_servrar.append(server)
+
+            visa_servrar(filtrerade_servrar)
+        else:
+            visa_servrar(servrar)
+
     else:
         visa_meny(servrar, data_fil)
 
