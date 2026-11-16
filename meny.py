@@ -1,4 +1,6 @@
-from lagring import spara_servrar
+from lagring import spara_servrar, exportera_csv
+from kontroller import kontrollera_server, kontrollera_alla_servrar
+
 
 def visa_servrar(servrar):
     if not servrar:
@@ -22,7 +24,7 @@ def visa_servrar(servrar):
 def lagg_till_servrar(servrar, datafil):
     namn = input("Ange servernamn: ")
 
-    # Kontrollera om servernamnet redan finns
+    
     for server in servrar:
         if server["namn"] == namn:
             print("En server med det namnet finns redan.")
@@ -30,7 +32,7 @@ def lagg_till_servrar(servrar, datafil):
 
     adress = input("Ange serveradress: ")
 
-    # Validera miljön
+    
     while True:
         miljo = input("Ange servermiljö (dev, test, prod): ").lower()
         if miljo in ["dev", "test", "prod"]:
@@ -72,7 +74,6 @@ def ta_bort_server(servrar, data_fil):
 
             servrar.remove(server)
 
-            from lagring import spara_servrar
             spara_servrar(servrar, data_fil)
 
             print("Servern har tagits bort.")
@@ -98,6 +99,51 @@ def filtrera_servrar(servrar):
 
     print(f"\nServrar i miljön '{miljo}':")
     visa_servrar(filtrerade_servrar)
+
+
+def visa_meny(servrar, data_fil):
+    while True:
+        print("\n===== SERVER INVENTORY TOOL =====")
+        print("1. Visa alla servrar")
+        print("2. Filtrera servrar efter miljö")
+        print("3. Lägg till server")
+        print("4. Ta bort server")
+        print("5. Kontrollera en server")
+        print("6. Kontrollera alla servrar")
+        print("7. Exportera till CSV")
+        print("8. Avsluta")
+
+        val = input("\nVälj ett alternativ: ")
+
+        if val == "1":
+            visa_servrar(servrar)
+
+        elif val == "2":
+            filtrera_servrar(servrar)
+
+        elif val == "3":
+            lagg_till_servrar(servrar, data_fil)
+
+        elif val == "4":
+            ta_bort_server(servrar, data_fil)
+
+        elif val == "5":
+            namn = input("Ange servernamn: ")
+            kontrollera_server(servrar, namn, data_fil)
+
+        elif val == "6":
+            kontrollera_alla_servrar(servrar, data_fil)
+
+        elif val == "7":
+            exportera_csv(servrar)
+
+        elif val == "8":
+            print("Programmet avslutas.")
+            break
+
+        else:
+            print("Ogiltigt val. Försök igen.")
+            
 
     
 
